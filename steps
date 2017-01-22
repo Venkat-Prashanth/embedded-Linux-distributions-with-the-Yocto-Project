@@ -1,0 +1,40 @@
+To do list for yocto 
+==============================
+
+requirements:
+-------------
+PC with Ubuntu 14.04 LTS (recommended)
+any other ubuntu distro (is also ok but problems may arise during build)
+internet connection to download sources
+
+procedure:
+----------
+1. open terminal and please do the following:
+
+sudo apt-get update
+
+sudo apt-get install -y libncurses-dev vim bison flex texinfo zlibc zlib1g zlib1g-dev libglib2.0-dev gawk automake libtool cvs ctags cscope mtd-utils u-boot-tools minicom xinetd tftpd tftp nfs-kernel-server git g++	
+
+sudo apt-get install -y gcc-multilib texinfo unzip diffstat git-core wget gawk build-essential chrpath socat libsdl1.2-dev xterm lzop
+
+2.download yocto source (YP Core - Krogoth 2.1.1)
+git clone -b krogoth git://git.yoctoproject.org/poky.git
+
+3. copy the just downloaded source into your work directory
+
+4.change directory into poky and source the environment using this command
+veda@veda-Aspire-E1-531:poky$ source oe-init-build-env
+
+5. a new directory named build is created and path is automatically set into that directory
+
+6. veda@veda-Aspire-E1-531:build$ vim conf/local.conf
+
+	select  MACHINE ?= "qemuarm"
+	
+	save and exit
+
+7. veda@veda-Aspire-E1-531:build$ bitbake -k core-image-sato
+
+8. To install images on target and run target:
+
+veda@veda-Aspire-E1-531:build$ runqemu qemuarm
